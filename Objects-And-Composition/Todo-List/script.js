@@ -8,9 +8,10 @@ function addTask() {
 	let todoList = document.getElementById("todo-list");
 
 	const taskTextContent = input.value.trim();
-    if (taskTextContent.length == 0) {
-        return
-    }
+	if (taskTextContent.length == 0) {
+		return;
+	}
+
 	taskElement.textContent = taskTextContent;
 	todoList.appendChild(taskElement);
 
@@ -18,7 +19,9 @@ function addTask() {
 	taskElement.appendChild(taskDeleteBtn);
 }
 
-// function deleteTask() {
-// 	console.log("Delete");
-// }
-// todo-list
+function deleteTask(event) {
+	if (event.target.tagName == "BUTTON") {
+		const taskElement = event.target.parentElement;
+		taskElement.remove();
+	}
+}
