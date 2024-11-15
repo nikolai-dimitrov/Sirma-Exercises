@@ -1,7 +1,24 @@
 document.getElementById("add-button").addEventListener("click", addTask);
+document.getElementById("todo-list").addEventListener("click", deleteTask);
 function addTask() {
-	console.log("adding task");
+	const input = document.getElementById("todo-input");
+
+	let taskElement = document.createElement("li");
+	let taskDeleteBtn = document.createElement("button");
+	let todoList = document.getElementById("todo-list");
+
+	const taskTextContent = input.value.trim();
+    if (taskTextContent.length == 0) {
+        return
+    }
+	taskElement.textContent = taskTextContent;
+	todoList.appendChild(taskElement);
+
+	taskDeleteBtn.textContent = "Delete";
+	taskElement.appendChild(taskDeleteBtn);
 }
 
-const input = document.getElementById("todo-input");
-const taskTextContent = input.value.trim();
+// function deleteTask() {
+// 	console.log("Delete");
+// }
+// todo-list
