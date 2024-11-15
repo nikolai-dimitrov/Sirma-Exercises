@@ -1,5 +1,6 @@
 document.getElementById("add-button").addEventListener("click", addTask);
 document.getElementById("todo-list").addEventListener("click", deleteTask);
+// Use event delegation instead of adding individual event listener for every delete task button
 function addTask() {
 	const input = document.getElementById("todo-input");
 
