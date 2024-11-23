@@ -12,10 +12,10 @@ class Instrument {
 		this.type = type;
 	}
 	play() {
-		return "playing";
+		console.log(`The ${this.type} ${this.name} is playing`);
 	}
 	tune() {
-		return "tuning";
+		console.log(`The ${this.type} ${this.name} is tuning`);
 	}
 }
 
@@ -28,7 +28,7 @@ class StringInstrument extends Instrument {
 		console.log(
 			`The ${this.type} ${this.name} with ${
 				this.numberOfStrings
-			} strings is ${super.play()}`
+			} strings is tuning`
 		);
 	}
 }
@@ -42,7 +42,7 @@ class PercussionInstrument extends Instrument {
 		console.log(
 			`The ${this.type} ${this.name} with ${
 				this.numberOfStrings
-			} size is ${super.play()}`
+			} size is tuning`
 		);
 	}
 }
