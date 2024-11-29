@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>Return first and last name from a form</title>
+	</head>
+	<body>
+		<form id="form1" onsubmit="getFormValue(event)">
+			First name: <input type="text" name="fname" value="David" /><br />
+			Last name: <input type="text" name="lname" value="Beckham" /><br />
+			<input type="submit" value="Submit" />
+		</form>
+	</body>
+	<script>
+		function getFormValue(event) {
+			const formData = new FormData(event.target);
+			event.preventDefault();
+
+			const entriesObj = Object.fromEntries(formData);
+			const { fname, lname } = entriesObj;
+			displayFullName(fname, lname);
+		}
+
+		function displayFullName(firstName, lastName) {
+			const htmlBody = document.querySelector("body");
+			const fullNameParagraph = document.createElement("p");
+			fullNameParagraph.textContent = `Your full name is: ${firstName} ${lastName}`;
+			htmlBody.appendChild(fullNameParagraph);
+		}
+	</script>
+</html>
