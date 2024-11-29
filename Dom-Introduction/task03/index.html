@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>JS DOM paragraph style</title>
+	</head>
+	<body>
+		<p id="text">JavaScript Exercises</p>
+		<div>
+			<button onclick="changeBackground()">Change</button>
+		</div>
+	</body>
+	<script>
+		const colorsList = [
+			"yellow",
+			"red",
+			"green",
+			"orange",
+			"gray",
+			"purple",
+		];
+
+		function generateRandomNumberInInterval(maxNum, minNum) {
+			return Math.floor(Math.random() * (maxNum - minNum + 1)) + minNum;
+		}
+
+		function changeBackground() {
+			const num = Math.floor(Math.random() * 6);
+			const paragraphElement = document.querySelector("#text");
+			paragraphElement.style.backgroundColor = colorsList[num];
+		}
+	</script>
+</html>
