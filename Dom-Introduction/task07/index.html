@@ -1,0 +1,40 @@
+<!-- Write a JavaScript function to create a table, accept row and column
+numbers, and input row-column numbers as cell content (e.g. Row-0
+Column-0). -->
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>Change the content of a cell</title>
+		<style type="text/css">
+			body {
+				margin: 30px;
+			}
+		</style>
+	</head>
+	<body>
+		<table id="myTable" border="1"></table>
+		<form>
+			<input
+				type="button"
+				onclick="createTable(3, 5)"
+				value="Create the table"
+			/>
+		</form>
+	</body>
+	<script>
+		function createTable(rowsCount, colsCount) {
+            const table = document.getElementById("myTable");
+			for (let i = 0; i < rowsCount; i++) {
+				const trElement = document.createElement("tr");
+				for (let j = 0; j < colsCount; j++) {
+					const tdElement = document.createElement("td");
+                    tdElement.textContent = `Row-${i} Column-${j}`
+					trElement.appendChild(tdElement);
+				}
+                table.appendChild(trElement)
+			}
+		}
+	</script>
+</html>
