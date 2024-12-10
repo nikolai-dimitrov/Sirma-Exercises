@@ -19,6 +19,35 @@ function handleCreateElement() {
 	inputTextElement.value = "";
 }
 
+function handleSaveChanges(event) {
+	const updatedValue =
+		event.target.parentElement.querySelector("input").value;
+
+	if (updatedValue.length == 0) {
+		alert("Value can not be empty string");
+		return;
+	}
+
+	const newLiElement = document.createElement("li");
+	newLiElement.textContent = updatedValue;
+	event.target.parentElement.replaceWith(newLiElement);
+}
+
 function handleEditElementText(event) {
-	console.log("edit text");
+	if (event.target.tagName != "LI") {
+		return;
+	}
+
+	const inputFieldElement = document.createElement("input");
+	const updateBtn = document.createElement("button");
+	updateBtn.textContent = "Update";
+	const editElementsWrapper = document.createElement("div");
+	editElementsWrapper.appendChild(inputFieldElement);
+	editElementsWrapper.appendChild(updateBtn);
+
+	const currentListElementText = event.target.textContent;
+	inputFieldElement.value = currentListElementText;
+	event.target.replaceWith(editElementsWrapper);
+
+	updateBtn.addEventListener("click", handleSaveChanges);
 }
