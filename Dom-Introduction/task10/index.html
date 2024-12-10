@@ -4,8 +4,24 @@
 	<head>
 		<meta charset="utf-8" />
 		<title>Calculate sphere volume.</title>
+		<link rel="stylesheet" href="./styles.css" />
 	</head>
-	<body></body>
+	<body>
+		<main>
+			<h3>Input radius value and get the volume of a sphere.</h3>
+			<form action="">
+				<div>
+					<label for="radius">Radius</label>
+					<input type="text" id="radius" />
+				</div>
+				<div>
+					<label for="volume">Volume</label>
+					<input type="text" id="volume" />
+				</div>
+				<button>Calculate</button>
+			</form>
+		</main>
+	</body>
 	<script>
 		function calcVolume() {
 			console.log("Calculating sphere volume.");
