@@ -9,21 +9,22 @@
 	<body>
 		<main>
 			<h3>Input radius value and get the volume of a sphere.</h3>
-			<form action="">
+			<form action="" onsubmit="calcVolume(event)">
 				<div>
 					<label for="radius">Radius</label>
 					<input type="text" id="radius" />
 				</div>
 				<div>
 					<label for="volume">Volume</label>
-					<input type="text" id="volume" />
+					<input type="text" id="volume" value="0.0000" />
 				</div>
 				<button>Calculate</button>
 			</form>
 		</main>
 	</body>
 	<script>
-		function calcVolume() {
+		function calcVolume(event) {
+			event.preventDefault();
 			console.log("Calculating sphere volume.");
 		}
 	</script>
