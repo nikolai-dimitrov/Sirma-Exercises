@@ -12,7 +12,7 @@
 			<form action="" onsubmit="calcVolume(event)">
 				<div>
 					<label for="radius">Radius</label>
-					<input type="text" id="radius" />
+					<input type="number" id="radius" />
 				</div>
 				<div>
 					<label for="volume">Volume</label>
@@ -25,7 +25,14 @@
 	<script>
 		function calcVolume(event) {
 			event.preventDefault();
-			console.log("Calculating sphere volume.");
+
+			const inputRadiusElement = document.getElementById("radius");
+			const inputVolumeElement = document.getElementById("volume");
+
+			const radiusValue = Number(inputRadiusElement.value);
+			const volumeResult = (4 * (Math.PI * Math.pow(radiusValue, 3))) / 3;
+
+			inputVolumeElement.value = volumeResult.toFixed(4);
 		}
 	</script>
 </html>
