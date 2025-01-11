@@ -29,7 +29,9 @@ const handleAddTask = () => {
 	if (!newTask) {
 		return;
 	}
+
 	todoList.appendChild(newTask);
+	input.value = "";
 };
 
 const handleDeleteTask = () => {
