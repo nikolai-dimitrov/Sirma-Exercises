@@ -1,6 +1,11 @@
 const addTaskBtn = document.getElementById("add-btn");
 const input = document.getElementById("todo-input");
 const todoList = document.getElementById("todo-list");
+const resetInputBtn = document.getElementById("reset-btn");
+
+const handleResetInputField = () => {
+	input.value = "";
+};
 
 const createDeleteBtn = () => {
 	const deleteBtn = document.createElement("button");
@@ -37,4 +42,6 @@ const handleAddTask = () => {
 const handleDeleteTask = () => {
 	//
 };
+
 addTaskBtn.addEventListener("click", handleAddTask);
+resetInputBtn.addEventListener("click", handleResetInputField);
