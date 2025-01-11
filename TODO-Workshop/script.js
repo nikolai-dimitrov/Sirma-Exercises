@@ -11,6 +11,8 @@ const createDeleteBtn = () => {
 	const deleteBtn = document.createElement("button");
 	deleteBtn.textContent = "X";
 	deleteBtn.className = "delete-btn";
+
+	deleteBtn.addEventListener("click", handleDeleteTask);
 	return deleteBtn;
 };
 const createTask = () => {
@@ -39,8 +41,8 @@ const handleAddTask = () => {
 	input.value = "";
 };
 
-const handleDeleteTask = () => {
-	//
+const handleDeleteTask = (e) => {
+	e.target.parentElement.remove();
 };
 
 addTaskBtn.addEventListener("click", handleAddTask);
