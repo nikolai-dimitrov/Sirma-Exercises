@@ -64,7 +64,8 @@ const handleAddTask = () => {
 	todoList.appendChild(newTask);
 	input.value = "";
 
-	// localStorage.setItem(newTask.id, newTask.textContent);
+	tasksList.push({ [newTask.id]: newTask.textContent });
+	localStorage.setItem("tasksList", JSON.stringify(tasksList));
 
 	localStorage.setItem("currentId", currentId);
 };
