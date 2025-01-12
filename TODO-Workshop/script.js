@@ -10,8 +10,17 @@ const getCurrentId = () => {
 	}
 	return Number(currentId);
 };
-
 let currentId = getCurrentId();
+
+const getTasksList = () => {
+	let tasksList = JSON.parse(localStorage.getItem("tasksList"));
+	if (!tasksList) {
+		tasksList = [];
+		localStorage.setItem("tasksList", JSON.stringify(tasksList));
+	}
+	return tasksList;
+};
+let tasksList = getTasksList();
 
 const handleResetInputField = () => {
 	input.value = "";
@@ -54,6 +63,7 @@ const handleAddTask = () => {
 	input.value = "";
 
 	// localStorage.setItem(newTask.id, newTask.textContent);
+
 	localStorage.setItem("currentId", currentId);
 };
 
