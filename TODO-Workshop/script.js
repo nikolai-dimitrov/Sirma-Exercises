@@ -7,14 +7,38 @@ const resetInputBtn = document.getElementById("reset-btn");
 
 let currentId = getCurrentId();
 let tasksList = getTasksList();
-
+//TODO: Implement createHtmlElement for reusability instead of duplicate code into createDeleteBtn and createUpdateBtn
+// const createHtmlElement = (type, content, className) => {};
 const handleResetInputField = () => {
 	input.value = "";
 };
 
+const handleUpdateTask = (e) => {
+	const currentTaskHtmlElement = e.target.parentElement.parentElement;
+	const taskId = currentTaskHtmlElement.id;
+	const taskName = currentTaskHtmlElement.firstChild.textContent;
+	const newTaskName = prompt(`You are updating: ${taskName}`);
+
+	if (newTaskName == null || newTaskName.trim() == "") {
+		return;
+	}
+
+	const updatedTasksList = getTasksList().map((taskObject) => {
+		if (taskObject.id == taskId) {
+			taskObject.task = newTaskName;
+			return taskObject;
+		}
+		return taskObject;
+	});
+
+	localStorage.setItem("tasksList", JSON.stringify(updatedTasksList));
+	tasksList = updatedTasksList;
+
+	currentTaskHtmlElement.firstChild.textContent = newTaskName;
+};
 const handleDeleteTask = (e) => {
-	const taskId = e.target.parentElement.id;
-	e.target.parentElement.remove();
+	const taskId = e.target.parentElement.parentElement.id;
+	e.target.parentElement.parentElement.remove();
 
 	const localStorageTasksList = getTasksList().filter(
 		({ id, task }) => id != taskId
@@ -33,14 +57,15 @@ const createDeleteBtn = () => {
 	return deleteBtn;
 };
 
-// const createUpdateBtn = () => {
-// 	const updateBtn = document.createElement("button");
-// 	updateBtn.textContent = "update";
-// 	updateBtn.className = "update-btn";
+const createUpdateBtn = () => {
+	const updateBtn = document.createElement("button");
+	updateBtn.textContent = "update";
+	updateBtn.className = "update-btn";
 
-// 	// updateBtn.addEventListener("click", handleUpdateTask);
-// 	return updateBtn;
-// };
+	updateBtn.addEventListener("click", handleUpdateTask);
+	return updateBtn;
+};
+
 const createTask = (id, value) => {
 	const inputValue = value ? value : input.value;
 	if (inputValue.trim().length == 0) {
@@ -56,11 +81,15 @@ const createTask = (id, value) => {
 	task.textContent = inputValue;
 	task.id = id ? id : currentId;
 
-	// const updateBtn = createUpdateBtn();
+	const buttonContainer = document.createElement("div");
+
+	const updateBtn = createUpdateBtn();
 	const deleteBtn = createDeleteBtn();
 
-	// task.appendChild(updateBtn);
-	task.appendChild(deleteBtn);
+	buttonContainer.appendChild(updateBtn);
+	buttonContainer.appendChild(deleteBtn);
+
+	task.appendChild(buttonContainer);
 
 	return task;
 };
