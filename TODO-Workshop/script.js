@@ -3,6 +3,16 @@ const input = document.getElementById("todo-input");
 const todoList = document.getElementById("todo-list");
 const resetInputBtn = document.getElementById("reset-btn");
 
+const getCurrentId = () => {
+	let currentId = localStorage.getItem("currentId");
+	if (!currentId) {
+		return 0;
+	}
+	return Number(currentId);
+};
+
+let currentId = getCurrentId();
+
 const handleResetInputField = () => {
 	input.value = "";
 };
@@ -22,12 +32,15 @@ const createTask = () => {
 	}
 
 	const task = document.createElement("li");
+	currentId += 1;
 
 	task.className = "todo-item";
 	task.textContent = inputValue;
+	task.id = currentId;
 
 	const deleteBtn = createDeleteBtn();
 	task.appendChild(deleteBtn);
+
 	return task;
 };
 
@@ -39,6 +52,9 @@ const handleAddTask = () => {
 
 	todoList.appendChild(newTask);
 	input.value = "";
+
+	// localStorage.setItem(newTask.id, newTask.textContent);
+	localStorage.setItem("currentId", currentId);
 };
 
 const handleDeleteTask = (e) => {
