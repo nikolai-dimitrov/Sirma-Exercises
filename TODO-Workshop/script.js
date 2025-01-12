@@ -28,6 +28,10 @@ const handleResetInputField = () => {
 	input.value = "";
 };
 
+const handleDeleteTask = (e) => {
+	e.target.parentElement.remove();
+};
+
 const createDeleteBtn = () => {
 	const deleteBtn = document.createElement("button");
 	deleteBtn.textContent = "X";
@@ -36,24 +40,33 @@ const createDeleteBtn = () => {
 	deleteBtn.addEventListener("click", handleDeleteTask);
 	return deleteBtn;
 };
-const createTask = () => {
-	const inputValue = input.value;
+const createTask = (id, value) => {
+	const inputValue = value ? value : input.value;
 	if (inputValue.trim().length == 0) {
 		return;
 	}
 
 	const task = document.createElement("li");
-	currentId += 1;
+	if (!id && !value) {
+		currentId += 1;
+	}
 
 	task.className = "todo-item";
 	task.textContent = inputValue;
-	task.id = currentId;
+	task.id = id ? id : currentId;
 
 	const deleteBtn = createDeleteBtn();
 	task.appendChild(deleteBtn);
-
 	return task;
 };
+
+const renderTasksList = () => {
+	tasksList.map(({ id, task }) => {
+		const createdTask = createTask(id, task);
+		todoList.appendChild(createdTask);
+	});
+};
+renderTasksList();
 
 const handleAddTask = () => {
 	const newTask = createTask();
@@ -64,14 +77,10 @@ const handleAddTask = () => {
 	todoList.appendChild(newTask);
 	input.value = "";
 
-	tasksList.push({ [newTask.id]: newTask.textContent });
+	tasksList.push({ id: newTask.id, task: newTask.firstChild.textContent });
 	localStorage.setItem("tasksList", JSON.stringify(tasksList));
 
 	localStorage.setItem("currentId", currentId);
-};
-
-const handleDeleteTask = (e) => {
-	e.target.parentElement.remove();
 };
 
 addTaskBtn.addEventListener("click", handleAddTask);
