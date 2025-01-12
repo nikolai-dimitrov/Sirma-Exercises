@@ -30,6 +30,13 @@ const handleResetInputField = () => {
 
 const handleDeleteTask = (e) => {
 	e.target.parentElement.remove();
+	const taskId = e.target.parentElement.id;
+	const localStorageTasksList = JSON.parse(
+		localStorage.getItem("tasksList")
+	).filter(({ id, task }) => id != taskId);
+
+	localStorage.setItem("tasksList", JSON.stringify(localStorageTasksList));
+	tasksList = localStorageTasksList;
 };
 
 const createDeleteBtn = () => {
