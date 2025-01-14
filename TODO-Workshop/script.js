@@ -7,8 +7,15 @@ const resetInputBtn = document.getElementById("reset-btn");
 
 let currentId = getCurrentId();
 let tasksList = getTasksList();
-//TODO: Implement createHtmlElement for reusability instead of duplicate code into createDeleteBtn and createUpdateBtn
-// const createHtmlElement = (type, content, className) => {};
+const createHtmlElement = (type, content, className) => {
+	const newElement = document.createElement(type);
+	newElement.textContent = content;
+
+	if (className) {
+		newElement.className = className;
+	}
+	return newElement;
+};
 const handleResetInputField = () => {
 	input.value = "";
 };
@@ -36,6 +43,7 @@ const handleUpdateTask = (e) => {
 
 	currentTaskHtmlElement.firstChild.textContent = newTaskName;
 };
+
 const handleDeleteTask = (e) => {
 	const taskId = e.target.parentElement.parentElement.id;
 	e.target.parentElement.parentElement.remove();
@@ -49,18 +57,14 @@ const handleDeleteTask = (e) => {
 };
 
 const createDeleteBtn = () => {
-	const deleteBtn = document.createElement("button");
-	deleteBtn.textContent = "X";
-	deleteBtn.className = "delete-btn";
+	const deleteBtn = createHtmlElement("button", "X", "delete-btn");
 
 	deleteBtn.addEventListener("click", handleDeleteTask);
 	return deleteBtn;
 };
 
 const createUpdateBtn = () => {
-	const updateBtn = document.createElement("button");
-	updateBtn.textContent = "update";
-	updateBtn.className = "update-btn";
+	const updateBtn = createHtmlElement("button", "update", "update-btn");
 
 	updateBtn.addEventListener("click", handleUpdateTask);
 	return updateBtn;
